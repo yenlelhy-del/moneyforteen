@@ -108,7 +108,7 @@ tiltCards.forEach(card => {
 });
 
 // Google Apps Script Web App URL (Paste URL here)
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzs07Sjf43eNQkP49kcyjTTplj3tdNGCNUMshSxRaRJQCj0_jwzngKvkK6moVwa-4p5jA/exec";
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHsB2j6k3oI_AvNzUpXO5_QVYz6LQ-XoDg4O6jgA6O49-g1PIvg_uKqVLhaPzSvt3K/exec';
 
 // Handle Form Submission
 const form = document.getElementById('registration-form');
