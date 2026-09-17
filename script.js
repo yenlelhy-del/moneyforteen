@@ -106,3 +106,54 @@ tiltCards.forEach(card => {
         card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
 });
+
+// Google Apps Script Web App URL (Paste URL here)
+const APPS_SCRIPT_URL = "YOUR_WEB_APP_URL_HERE";
+
+// Handle Form Submission
+const form = document.getElementById('registration-form');
+const submitBtn = document.querySelector('#registration-form .btn');
+
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Change button state
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Đang xử lý...";
+        submitBtn.disabled = true;
+
+        const formData = {
+            parentName: document.getElementById('parent-name').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            childName: document.getElementById('child-name').value,
+            school: document.getElementById('school').value,
+            birthYear: document.getElementById('birth-year').value,
+            workshopSelect: document.getElementById('workshop-select').value
+        };
+
+        fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(() => {
+            // Success
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            form.reset();
+            const toast = document.getElementById('success-toast');
+            if (toast) toast.classList.add('show');
+        })
+        .catch(error => {
+            console.error("Error submitting form:", error);
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+            alert("Có lỗi xảy ra. Vui lòng thử lại sau hoặc liên hệ Hotline.");
+        });
+    });
+}
